@@ -5,7 +5,7 @@ This program uses genetic algorithm techniques to make progress in computing Ram
 
 Usage
 ---------
-compile with `make`. 
+compile with `make`
 
 run `java AdjMatrixGraph x` where `x` is the size of the complete graph you wish to test. To run tests on K_43 (a complete graph on 43 vertices), run `java AdjMatrixGraph 43`.
 
