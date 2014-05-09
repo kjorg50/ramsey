@@ -85,7 +85,6 @@ public class Genetics
     {
 	//gets a random parent
 	int random = (int)(Math.random()*p.getSize());
-	//return p.getChromosome(random);
 
 	//gets the best parents evar!!!1!1!
 	double chance = Math.random();

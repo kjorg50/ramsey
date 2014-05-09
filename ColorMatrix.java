@@ -74,18 +74,18 @@ public class ColorMatrix {
 
     public boolean isRed(int x, int y)
     {
-	//0 = red
-	if(!colors[x][y]) return true;
-	else return false;
+	//0 = false = red
+	return !(colors[x][y]);
     }
 
     public boolean isBlue(int x, int y)
     {
-	//1 = blue
-	if(colors[x][y]) return true;
-	else return false;
+	//1 = true = blue
+	return colors[x][y];
+
     }
 
+    // not sure what this should do?
     public boolean[] makeChromosome()
     {
 	for(int i=0; i<G.getVertices(); i++)

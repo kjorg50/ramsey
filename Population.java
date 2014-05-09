@@ -85,18 +85,18 @@ public class Population
     {
 	int i = 0;
 	String p="";
-	int terms = 25;
+	int termsPerRow = 25;
 	for(Chromosome c:pop)
 	    {
 		//p+="Fitness for graph "+i+": "+c.getFitness(5);
 		p+=c.getFitness(5)+"  ";
-		terms--;
+		termsPerRow--;
 		//if(c.getFitness(5)==0)
 		    //    c.getColorMatrix().printColoring();
-		if(terms==0)
+		if(termsPerRow==0)
 		    {
 			p+="\n";
-			terms=25;
+			termsPerRow=25;
 		    }
 		i++;
 	    }

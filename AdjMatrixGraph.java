@@ -185,7 +185,6 @@ public class AdjMatrixGraph {
 
     // test client
     public static void main(String[] args) {
-        long startTime = System.nanoTime();
 
         //gets the number of vertices we want
         int V = Integer.parseInt(args[0]);
@@ -235,22 +234,23 @@ public class AdjMatrixGraph {
         }
         //begin the mating process!!!
         int gen = 0;
+        long startTime = System.nanoTime();
         while(pop.getWorst().getFitness(5)>0)
         //while(gen<10)
             {
-            System.out.println("Generation "+gen);
-            System.out.println("=================");
-            pop = Genetics.evolve(pop);
-            System.out.println(pop);
-            System.out.println("\n");
-            gen++;
+                System.out.println("Generation "+gen);
+                System.out.println("=================");
+                pop = Genetics.evolve(pop);
+                System.out.println(pop);
+                System.out.println("\n");
+                gen++;
             }
         
-        System.out.println("Took "+gen+" generations");
         long endTime = System.nanoTime();
         long elapsed = endTime-startTime;
         double seconds = (double)elapsed / 1000000000.0;
         double minutes = (double)seconds / 60;
+        System.out.println("Took "+gen+" generations");
         System.out.println("Took "+(seconds) + " s"); 
         System.out.println("Took "+(minutes) + " m"); 
 
@@ -280,10 +280,9 @@ public class AdjMatrixGraph {
         }
         catch(Exception e)
             {
-                System.out.println("fail");
+                System.out.println("failed writing solutions to file");
             }
-        //print the population
-        //System.out.println(pop);
+
     }
 
 }
