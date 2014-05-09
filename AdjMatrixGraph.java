@@ -235,16 +235,17 @@ public class AdjMatrixGraph {
         //begin the mating process!!!
         int gen = 0;
         long startTime = System.nanoTime();
-        while(pop.getWorst().getFitness()>0)
-        //while(gen<10)
-            {
-                System.out.println("Generation "+gen);
-                System.out.println("=================");
-                pop = Genetics.evolve(pop);
-                System.out.println(pop);
-                System.out.println("\n");
-                gen++;
-            }
+
+        // until we have a counter-example solution
+        while(pop.getBest().getFitness()>0)
+        {
+            System.out.println("Generation "+gen);
+            System.out.println("=================");
+            pop = Genetics.evolve(pop);
+            System.out.println(pop);
+            System.out.println("\n");
+            gen++;
+        }
         
         long endTime = System.nanoTime();
         long elapsed = endTime-startTime;
@@ -254,29 +255,18 @@ public class AdjMatrixGraph {
         System.out.println("Took "+(seconds) + " s"); 
         System.out.println("Took "+(minutes) + " m"); 
 
-        //print the "0s" and their colorings to a file
-        //do further testing on these
+        // print the "0s" and their colorings to a file
+        // this is a candidate to submit to the Richcoin bank
         PrintWriter writer = null;
         int number = 0;
         System.out.println(pop);
         try{
             writer = new PrintWriter("datazeroes.txt", "UTF-8");
-            for(Chromosome chrom:pop.getPop())
-            {
-            //if(chrom.getFitness(5)==0)
-            //    {
-                //chrom.getColorMatrix().printColoring();
-                //System.out.println();
+            writer.println(pop.getBest().getColorMatrix().getColoring());
 
-                //number++;
-                //System.out.println(number);
-                writer.println(chrom.getColorMatrix().getColoring());
-                writer.println();
-
-                //      }
-            }
+            writer.println();
             writer.close();
-            System.out.println("possible zeroes dumped");
+            System.out.println("*** Counter-example saved ***");
         }
         catch(Exception e)
             {

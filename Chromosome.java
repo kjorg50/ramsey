@@ -14,63 +14,67 @@ public class Chromosome
     }
 
     /*
-        This takes the clique count calculation out of getFitness(), because it
+        I removed the clique count calculation out of getFitness(), because it
         is a very expensive computation. Now, the clique count will only be 
         calculated when each Chromosome is created or mutated. 
      */
     public void calcFitness(int n) //n-clique
     {
-        //we really only need two loops
-        //loop one (i in 0-(V-(n-1))) : V=vertices, n=n-clique
-        //loop two (j in 1-(V-(n-2))) 
-        //then each vertex after that is just j+1, j+2, j+3, ...
-
-        //eg 0 1 2 3 4
-        //   0 2 3 4 5
-        //   0 3 4 5 6
-        //   ...
-        //   1 2 3 4 5
-        //   1 3 4 5 6
-        //   ...
-        //fitness = 0;
+        /*
+        *** counts the number of monochromatic cliques in the current chromosome
+        ***
+        *** only checks values above diagonal
+        */
         int[] clique = new int[n]; // to hold the vertices we want to make a clique with
-        for(int x=0; x<C.getGraph().getVertices()-(n-1); x++)
+        int numVerts = C.getGraph().getVertices();
+        for(int i=0; i<numVerts-n+1; i++)
+        {
+            for(int j=i+1; j<numVerts-n+2; j++)
             {
-            for(int y=1; y<C.getGraph().getVertices()-(n-2); y++)
+                for (int k=j+1; k<numVerts-n+3; k++) 
                 {
-                // only check bottom diagonal of matrix
-                if(x!=y && x<y)
+                    if( C.getColor(i,j) == C.getColor(i,k) &&
+                        C.getColor(i,j) == C.getColor(j,k))
                     {
-                        clique[0] = x;
-                        clique[1] = y;
-                        int yplus = 1;
-
-                        // fill up the rest of the current clique array
-                        for(int i=2; i<n; i++)
-                            {
-                            clique[i] = y+yplus;
-                            yplus++;
-                            }
-                        //test if all in the clique are the same color
-                        /*if all are same color, add 1
-                        if(C.getColor(x,y) == C.getColor(y,z))
-                        if(C.getColor(z,x) == C.getColor(x,y))
-                        fitness++;*/
-                        boolean same = true;
-                        boolean first = C.getColor(clique[0],clique[1]);
-                        for(int j=1; j<n-1; j++)
+                        for (int l=k+1;l < numVerts-n+4; l++) 
                         {
-                            if(C.getColor(clique[j],clique[j+1]) != first)
+                            if( C.getColor(i,j) == C.getColor(i,l) &&
+                                C.getColor(i,j) == C.getColor(j,l) &&
+                                C.getColor(i,j) == C.getColor(k,l)) 
+                            {
+                                for (int m=l+1; m<numVerts-n+5; m++) 
                                 {
-                                same=false;
-                                break;
-                                }
-                        }
-
-                        if(same) this.fitness++;
+                                    if ( C.getColor(i,j) == C.getColor(i,m) &&
+                                         C.getColor(i,j) == C.getColor(j,m) &&
+                                         C.getColor(i,j) == C.getColor(k,m) &&
+                                         C.getColor(i,j) == C.getColor(l,m))
+                                    {
+                                        for (int inner=m+1; inner<numVerts-n+6; inner++) 
+                                        {
+                                            if(C.getColor(i,j) == 
+                                                 C.getColor(i,inner) &&
+                                               C.getColor(i,j) == 
+                                                 C.getColor(j,inner) &&
+                                               C.getColor(i,j) == 
+                                                 C.getColor(k,inner) &&
+                                               C.getColor(i,j) == 
+                                                 C.getColor(l,inner) &&
+                                               C.getColor(i,j) ==
+                                                 C.getColor(m,inner))
+                                            {
+                                                this.fitness++;
+                                            }
+                                        }
+                                    }   
+                                }// end m loop
+                            } 
+                        }// end l loop
                     }
-                }
-        }   
+
+                }// end k loop
+
+            }// end j loop
+        }// end i loop   
     }
 
     public int getFitness() 
