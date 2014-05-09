@@ -3,6 +3,7 @@ import java.util.*;
 public class Genetics
 {
     private static double mutationRate = 0.05;
+    private static final int RAMSEY_SIZE = 6;
 
     public static Population evolve(Population p)
     {
@@ -14,7 +15,7 @@ public class Genetics
 		//crossover
 		Chromosome baby = crossover(mom,pop);
 		//if it is better add it
-		if(baby.getFitness(5)<p.getWorst().getFitness(5))
+		if(baby.getFitness()<p.getWorst().getFitness())
 		    {
 			p.addChromosome(p.getWorstPosition(),baby);
 		    }
@@ -44,8 +45,12 @@ public class Genetics
 
 		c.getColorMatrix().setColor(pos1_x,pos1_y,pos2_color);
 		c.getColorMatrix().setColor(pos2_x,pos2_y,pos1_color);
+
+		// update the fitness value
+		c.calcFitness(RAMSEY_SIZE);
 	    }
     }
+
     public static Chromosome crossover(Chromosome mom, Chromosome pop)
     {
 	//take the colormatrix's and swap some stuffs around
@@ -81,6 +86,7 @@ public class Genetics
 	    }
 	return new Chromosome(babby);
     }
+
     public static Chromosome selectParent(Population p)
     {
 	//gets a random parent

@@ -40,7 +40,7 @@ public class Population
 	Chromosome worst = pop.get(0);
 	for(Chromosome c:pop)
 	    {
-		if(c.getFitness(5)>worst.getFitness(5))
+		if(c.getFitness()>worst.getFitness())
 		    worst = c;
 	    }
 	return worst;
@@ -51,7 +51,7 @@ public class Population
 	int worst = 0;
 	for(int i=0; i<pop.size(); i++)
 	    {
-		if(pop.get(i).getFitness(5)>pop.get(worst).getFitness(5))
+		if(pop.get(i).getFitness()>pop.get(worst).getFitness())
 		    worst = i;
 	    }
 	return worst;
@@ -62,7 +62,7 @@ public class Population
 	Chromosome best = pop.get(0);
 	for(Chromosome c:pop)
 	    {
-		if(c.getFitness(5)<best.getFitness(5))
+		if(c.getFitness()<best.getFitness())
 		    best = c;
 	    }
 	return best;
@@ -73,7 +73,7 @@ public class Population
 	int best = 0;
 	for(int i=0; i<pop.size(); i++)
 	    {
-		if(pop.get(i).getFitness(5)<pop.get(best).getFitness(5))
+		if(pop.get(i).getFitness()<pop.get(best).getFitness())
 		    best = i;
 	    }
 	return best;
@@ -88,10 +88,10 @@ public class Population
 	int termsPerRow = 25;
 	for(Chromosome c:pop)
 	    {
-		//p+="Fitness for graph "+i+": "+c.getFitness(5);
-		p+=c.getFitness(5)+"  ";
+		//p+="Fitness for graph "+i+": "+c.getFitness();
+		p+=c.getFitness()+"  ";
 		termsPerRow--;
-		//if(c.getFitness(5)==0)
+		//if(c.getFitness()==0)
 		    //    c.getColorMatrix().printColoring();
 		if(termsPerRow==0)
 		    {
