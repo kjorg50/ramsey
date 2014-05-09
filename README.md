@@ -5,9 +5,9 @@ This program uses genetic algorithm techniques to make progress in computing Ram
 
 Usage
 ---------
-compile with `make`
+* compile with `make`
 
-run `java AdjMatrixGraph x` where `x` is the size of the complete graph you wish to test. To run tests on K_43 (a complete graph on 43 vertices), run `java AdjMatrixGraph 43`.
+* run `java AdjMatrixGraph x` where `x` is the size of the complete graph you wish to test. To run tests on K_43 (a complete graph on 43 vertices), run `java AdjMatrixGraph 43`.
 
 The program spits out a data file at the end of its first run, you can plug these values back into the program to get more and more accurate answers. ~~When it asks for a data file at startup, simply type in the name of the data file at the prompt. I will work on making this a command line argument in the future.~~ 
 
