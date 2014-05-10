@@ -206,6 +206,7 @@ public class AdjMatrixGraph {
         Population pop = null;
         if(!(br==null))
             {
+                // for cs290b we are not reading in files
             pop = graphLoad(br, G); //load in the data from the file
             System.out.println(pop);
             try{
@@ -216,18 +217,7 @@ public class AdjMatrixGraph {
             }
         
         else{
-            
-            //get a random coloring
-            ColorMatrix c = new ColorMatrix(G);
-            
-            //System.out.println("\nColoring: ");
-            //make a new Chromosome (basically just a ColorMatrix)
-            Chromosome chr = new Chromosome(c);
-            //print our coloring
-            //c.printColoring();
-            //get fitness (number of same colored cliques of size x (x is the parameter)
-            int fit = chr.getFitness();
-            //System.out.println("Number of same colored triangles: "+fit+"\n");
+            // ** For cs290b the code always starts here **
             
             //make a new population
             pop = new Population(200, G.getVertices());
